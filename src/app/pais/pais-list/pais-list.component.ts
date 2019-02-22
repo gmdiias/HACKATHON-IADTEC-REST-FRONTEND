@@ -13,10 +13,12 @@ export class PaisListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'options'];
   dataSource = new MatTableDataSource();
 
+  totalElements: number;
+  pageSize: number;
+  page = {pageSize: 3, pageNumber: 1};
   constructor(private paisService: PaisService, private router: Router, private snackBar: MatSnackBar) {
-    paisService.search().pipe(
-      tap(console.log)
-    ).subscribe(value => value);
+    this.totalElements = 0;
+    this.pageSize = this.page.pageSize;
   }
 
   ngOnInit() {
@@ -27,9 +29,13 @@ export class PaisListComponent implements OnInit {
     if (filtro) {
       console.log(filtro);
     }
-    this.paisService.getAll().subscribe(data => {
-      this.dataSource = data;
+    this.paisService.search(this.page).subscribe(page => {
+      console.log(page);
+      this.totalElements = page.totalElements;
+      this.pageSize = page.pageable.pageSize;
+      this.dataSource = page.content;
     });
+
   }
 
   applyFilter(filterValue: string) {

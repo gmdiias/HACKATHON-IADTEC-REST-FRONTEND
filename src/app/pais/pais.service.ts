@@ -13,11 +13,11 @@ export class PaisService {
     return this.http.get('http://localhost:8080/api/pais/');
   }
 
-  search(): Observable<any> {
-
-    let params = new HttpParams()
-    .set('page_size', `1`)
-    .set('page_page', `2`);
+  search(page): Observable<any> {
+    const pageSize = ''+ page.pageSize;
+    const params = new HttpParams()
+    .set('page_size', pageSize)
+    .set('page_page', '1');
 
     return this.http.get('http://localhost:8080/api/pais/search', {
       params
