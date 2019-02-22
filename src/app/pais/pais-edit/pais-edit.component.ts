@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Produto } from '../produto.model';
-import { ProdutoService } from '../produto.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { Pais } from '../pais.model';
+import { PaisService } from '../pais.service';
 
 @Component({
-  selector: 'app-produto-edit',
-  templateUrl: './produto-edit.component.html',
-  styleUrls: ['./produto-edit.component.css']
+  selector: 'app-pais-edit',
+  templateUrl: './pais-edit.component.html',
+  styleUrls: ['./pais-edit.component.css']
 })
-export class ProdutoEditComponent implements OnInit {
-  entity: Produto;
+export class PaisEditComponent implements OnInit {
+  entity: Pais;
   entityForm: FormGroup;
   isNew = true;
 
-  constructor(private router: Router, fb: FormBuilder, private produtoService: ProdutoService,
+  constructor(private router: Router, fb: FormBuilder, private paisService: PaisService,
     private snackBar: MatSnackBar, protected activatedRoute: ActivatedRoute) {
-    this.entityForm = fb.group(new Produto());
+    this.entityForm = fb.group(new Pais());
   }
 
   private paramSub: Subscription;
@@ -29,16 +29,16 @@ export class ProdutoEditComponent implements OnInit {
     }
     this.paramSub = this.activatedRoute.params
       .pipe(switchMap(
-        p => this.produtoService.findById(Number(p.id)),
+        p => this.paisService.findById(Number(p.id)),
       ))
-      .subscribe((e: Produto) => {
+      .subscribe((e: Pais) => {
         this.updateEntity(e);
       });
   }
 
-  updateEntity(newEntity?: Produto): void {
+  updateEntity(newEntity?: Pais): void {
     this.isNew = this.checkIsNew(newEntity.id);
-    this.entity = newEntity || new Produto();
+    this.entity = newEntity || new Pais();
     this.entityForm.patchValue(this.entity);
   }
 
@@ -50,15 +50,15 @@ export class ProdutoEditComponent implements OnInit {
   }
 
   onVoltarClick() {
-    this.router.navigate(['produto/list']);
+    this.router.navigate(['pais/list']);
   }
 
   onSubmit() {
     this.entityForm.disable();
 
-    this.produtoService.saveOrCreate(this.isNew, this.entityForm.value).then(_ => {
+    this.paisService.saveOrCreate(this.isNew, this.entityForm.value).then(_ => {
       this.openSnackBar('Produto salvo com sucesso!', 'Ok');
-      this.router.navigate(['produto/list']);
+      this.router.navigate(['pais/list']);
     }).catch(_ => {
       this.openSnackBar('Ocorreu um erro ao salvar o Produto!', 'Erro');
       this.entityForm.enable();

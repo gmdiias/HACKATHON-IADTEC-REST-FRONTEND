@@ -8,9 +8,8 @@ import { AppDashboardComponent } from './dashboard/dashboard.component';
 import { AppNavbarComponent } from './navbar/navbar.component';
 import { ClienteModule } from './cliente/cliente.module';
 import { ClienteService } from './cliente/cliente.service';
-import { ProdutoModule } from './produto/produto.module';
-import { ProdutoService } from './produto/produto.service';
-import { CompraModule } from './compra/compra.module';
+import { PaisModule } from './pais/pais.module';
+import { PaisService } from './pais/pais.service';
 
 
 @NgModule({
@@ -24,11 +23,10 @@ import { CompraModule } from './compra/compra.module';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    ProdutoModule,
-    ClienteModule,
-    CompraModule
+    PaisModule,
+    ClienteModule
   ],
-  providers: [ProdutoService, ClienteService],
+  providers: [PaisService, ClienteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule, MatCardModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSnackBarModule, MatIconModule } from '@angular/material';
-import { ProdutoEditComponent } from './produto-edit/produto-edit.component';
-import { ProdutoListComponent } from './produto-list/produto-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PaisListComponent } from './pais-list/pais-list.component';
+import { PaisEditComponent } from './pais-edit/pais-edit.component';
 
 @NgModule({
   declarations: [
-    ProdutoListComponent,
-    ProdutoEditComponent,
+    PaisListComponent,
+    PaisEditComponent
   ],
   imports: [
     CommonModule,
@@ -22,8 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   exports: [
-    ProdutoListComponent,
-    ProdutoEditComponent,
+    PaisListComponent,
+    PaisEditComponent
   ],
 })
-export class ProdutoModule { }
+export class PaisModule { }
