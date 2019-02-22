@@ -1,9 +1,5 @@
 <h2>Estados</h2>
 
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
-</mat-form-field>
-
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <ng-container matColumnDef="id">
@@ -22,7 +18,7 @@
   </ng-container>
 
   <ng-container matColumnDef="pais">
-    <th mat-header-cell *matHeaderCellDef> Pais </th>
+    <th mat-header-cell *matHeaderCellDef> País </th>
     <td mat-cell *matCellDef="let element"> {{element.pais.nome}} </td>
   </ng-container>
 

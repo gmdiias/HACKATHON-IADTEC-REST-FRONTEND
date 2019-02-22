@@ -141,7 +141,7 @@ export class ClienteEditComponent implements OnInit {
       this.openSnackBar('Cliente salvo com sucesso!', 'Ok');
       this.router.navigate(['cliente/list']);
     }).catch(_ => {
-      this.openSnackBar('Ocorreu um erro ao salvar o cliente!', 'Erro');
+      this.openSnackBar('Ocorreu um erro ao salvar o Cliente!', 'Erro');
       this.entityForm.enable();
     });
   }
