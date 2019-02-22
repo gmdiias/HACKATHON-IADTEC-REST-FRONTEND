@@ -28,7 +28,7 @@ import { MOMENT_DATE_FORMATS } from "../components/date-adapter/moment-date-form
   ]
 })
 export class RelatorioListComponent implements OnInit {
-  displayedColumns: string[] = ["cliente", "estado", "pais"];
+  displayedColumns: string[] = ["cliente", "cpf", "situacao", "estado", "pais"];
   dataSource = new MatTableDataSource();
   filtro: Filtro = new Filtro();
 
@@ -96,5 +96,16 @@ export class RelatorioListComponent implements OnInit {
     this.snackBar.open(mensagem, acao, {
       duration: 5000
     });
+  }
+
+  formataCpf(cpf: string) {
+    if (cpf && cpf.length === 11) {
+      return cpf.replace(
+        /(\d{3})[.]?(\d{3})[.]?(\d{3})[-]?(\d{2})/,
+        "$1.$2.$3-$4"
+      );
+    }
+
+    return "CPF Inválido";
   }
 }
