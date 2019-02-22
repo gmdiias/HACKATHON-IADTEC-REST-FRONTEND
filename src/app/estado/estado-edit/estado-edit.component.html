@@ -2,19 +2,17 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        {{isNew ? 'Cadastrar' : 'Editar'}} Cliente
+        {{isNew ? 'Cadastrar' : 'Editar'}} Estado
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
-        <mat-form-field class="col-6">
+        <mat-form-field class="col">
           <input matInput placeholder="Nome" formControlName="nome" required>
         </mat-form-field>
-        <mat-form-field class="col-6">
-          <input matInput placeholder="CPF" formControlName="cpf" required>
-        </mat-form-field>
-        <mat-form-field class="col-6">
-          <input matInput type="email" placeholder="E-mail" formControlName="email" required>
+
+        <mat-form-field class="col">
+          <input matInput placeholder="UF" formControlName="uf" required>
         </mat-form-field>
 
       </div>

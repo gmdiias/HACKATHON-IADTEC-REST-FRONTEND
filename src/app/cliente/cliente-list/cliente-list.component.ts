@@ -9,7 +9,7 @@ import { ClienteService } from '../cliente.service';
   styleUrls: ['./cliente-list.component.css']
 })
 export class ClienteListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nome', 'turma', 'options'];
+  displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'estado', 'options'];
   dataSource = new MatTableDataSource();
 
   constructor(private clienteService: ClienteService, private router: Router, private snackBar: MatSnackBar) { }

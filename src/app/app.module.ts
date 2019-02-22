@@ -10,6 +10,8 @@ import { ClienteModule } from './cliente/cliente.module';
 import { ClienteService } from './cliente/cliente.service';
 import { PaisModule } from './pais/pais.module';
 import { PaisService } from './pais/pais.service';
+import { EstadoModule } from './estado/estado.module';
+import { EstadoService } from './estado/estado.service';
 
 
 @NgModule({
@@ -24,9 +26,10 @@ import { PaisService } from './pais/pais.service';
     HttpClientModule,
     AppRoutingModule,
     PaisModule,
-    ClienteModule
+    ClienteModule,
+    EstadoModule
   ],
-  providers: [PaisService, ClienteService],
+  providers: [PaisService, ClienteService, EstadoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
