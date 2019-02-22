@@ -57,6 +57,33 @@ export class RelatorioListComponent implements OnInit {
     });
   }
 
+  download() {
+    console.log('aaaaaaaaaaaaaaa');
+    let url = 'http://localhost:8080/api/cliente/pdfreport';
+    let params = '?';
+
+    if (this.filtro.nome) {
+      params += 'nome=' + this.filtro.nome;
+    }
+
+    if (this.filtro.situacao) {
+      if (params) {
+        params += '&';
+      }
+      params += 'situacao=' + this.filtro.situacao;
+    }
+
+    if (this.filtro.dataNascimento) {
+      if (params) {
+        params += '&';
+      }
+      params += 'data=' + this.filtro.situacao;
+    }
+
+    console.log(url + params);
+    window.open(url + params, '_blank');
+  }
+
   applyFilter(filterValue: string) {
     this.refreshList(filterValue.trim().toLowerCase());
   }
