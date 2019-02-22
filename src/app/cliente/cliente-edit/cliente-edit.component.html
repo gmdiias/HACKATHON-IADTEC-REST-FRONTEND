@@ -65,6 +65,13 @@
           <mat-datepicker #picker></mat-datepicker>
           <mat-error *ngIf="entityForm.controls['dataNascimento'].hasError('required')">* Informe a Data de Nascimento.</mat-error>
         </mat-form-field>
+        <mat-form-field appearance="standard" class="col-3">
+            <mat-select [(value)]="entity.situacao"  placeholder="Situacoes" (selectionChange)="selectionChange($event)">
+                <mat-option *ngFor="let situacao of situacoes" [value]="situacao.value">
+                  {{situacao.viewValue}}
+                </mat-option>
+              </mat-select>
+        </mat-form-field>
       </div>
     </mat-card-content>
     <mat-card-actions>

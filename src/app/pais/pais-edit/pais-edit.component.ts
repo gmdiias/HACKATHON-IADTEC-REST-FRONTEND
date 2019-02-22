@@ -57,7 +57,7 @@ export class PaisEditComponent implements OnInit {
     this.entityForm.disable();
 
     this.paisService.saveOrCreate(this.isNew, this.entityForm.value).then(_ => {
-      this.openSnackBar('Produto salvo com sucesso!', 'Ok');
+      this.openSnackBar('Pais salvo com sucesso!', 'Ok');
       this.router.navigate(['pais/list']);
     }).catch(_ => {
       this.openSnackBar('Ocorreu um erro ao salvar o Produto!', 'Erro');
