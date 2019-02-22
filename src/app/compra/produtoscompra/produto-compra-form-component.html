@@ -1,0 +1,21 @@
+<ng-container [formGroup]="contratoForm" #form="ngForm">
+
+  <div class="row">
+
+    <mat-form-field class="col-6">
+      <mat-select placeholder="Selecione o Produto" formControlName="produto">
+        <mat-option *ngFor="let produto of produtosDisponiveis" [value]="produto">
+          {{produto.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="col-1">
+      <input matInput placeholder="Quantidade" formControlName="quantidade">
+    </mat-form-field>
+
+    <ng-content></ng-content>
+
+  </div>
+
+</ng-container>
