@@ -1,26 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { Estado } from '../estado.model';
-import { EstadoService } from '../estado.service';
-import { Pais } from 'src/app/pais/pais.model';
-import { PaisService } from 'src/app/pais/pais.service';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormGroup,
+  AbstractControl,
+  ValidationErrors
+} from "@angular/forms";
+import { MatSnackBar } from "@angular/material";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription, Observable, of } from "rxjs";
+import { switchMap } from "rxjs/operators";
+import { Estado } from "../estado.model";
+import { EstadoService } from "../estado.service";
+import { Pais } from "src/app/pais/pais.model";
+import { PaisService } from "src/app/pais/pais.service";
+
+export function paisValidator(c: AbstractControl): ValidationErrors | null {
+  const pais: Pais = c.value;
+
+  if (pais && pais.id && pais.id !== -1) {
+    return null;
+  }
+  return { paisInvalido: "Pais Inválido" };
+}
 
 @Component({
-  selector: 'app-estado-edit',
-  templateUrl: './estado-edit.component.html',
-  styleUrls: ['./estado-edit.component.css']
+  selector: "app-estado-edit",
+  templateUrl: "./estado-edit.component.html",
+  styleUrls: ["./estado-edit.component.css"]
 })
 export class EstadoEditComponent implements OnInit {
   entity: Estado;
   entityForm: FormGroup;
   isNew = true;
 
-  constructor(private router: Router, fb: FormBuilder, private estadoService: EstadoService,
-    private snackBar: MatSnackBar, protected activatedRoute: ActivatedRoute, private paisService: PaisService) {
+  constructor(
+    private router: Router,
+    fb: FormBuilder,
+    private estadoService: EstadoService,
+    private snackBar: MatSnackBar,
+    protected activatedRoute: ActivatedRoute,
+    private paisService: PaisService
+  ) {
     this.entityForm = fb.group(new Estado());
   }
 
@@ -32,12 +52,13 @@ export class EstadoEditComponent implements OnInit {
       this.paramSub.unsubscribe();
     }
     this.paramSub = this.activatedRoute.params
-      .pipe(switchMap(
-        p => this.estadoService.findById(Number(p.id)),
-      ))
+      .pipe(switchMap(p => this.estadoService.findById(Number(p.id))))
       .subscribe((e: Estado) => {
         this.updateEntity(e);
       });
+
+    const paisControl = this.entityForm.get('pais');
+    paisControl.setValidators(paisValidator);
   }
 
   updateEntity(newEntity?: Estado): void {
@@ -54,27 +75,29 @@ export class EstadoEditComponent implements OnInit {
   }
 
   onVoltarClick() {
-    this.router.navigate(['estado/list']);
+    this.router.navigate(["estado/list"]);
   }
 
   onSubmit() {
     this.entityForm.disable();
 
-    this.estadoService.saveOrCreate(this.isNew, this.entityForm.value).then(_ => {
-      this.openSnackBar('Estado salvo com sucesso!', 'Ok');
-      this.router.navigate(['estado/list']);
-    }).catch(_ => {
-      this.openSnackBar('Ocorreu um erro ao salvar o Estado!', 'Erro');
-      this.entityForm.enable();
-    });
+    this.estadoService
+      .saveOrCreate(this.isNew, this.entityForm.value)
+      .then(_ => {
+        this.openSnackBar("Estado salvo com sucesso!", "Ok");
+        this.router.navigate(["estado/list"]);
+      })
+      .catch(_ => {
+        this.openSnackBar("Ocorreu um erro ao salvar o Estado!", "Erro");
+        this.entityForm.enable();
+      });
   }
 
   openSnackBar(mensagem: string, acao: string) {
     this.snackBar.open(mensagem, acao, {
-      duration: 5000,
+      duration: 5000
     });
   }
-
 
   onChange(valor: any) {
     this.paises = this._filter(valor);
@@ -90,5 +113,4 @@ export class EstadoEditComponent implements OnInit {
   formatFornecedorName(fornecedor: Pais): string {
     return fornecedor.nome;
   }
-
 }

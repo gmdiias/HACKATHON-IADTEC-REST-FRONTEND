@@ -35,7 +35,8 @@
               {{ p.nome }}
             </mat-option>
           </mat-autocomplete>
-          <mat-error *ngIf="entityForm.controls['pais'].hasError('required')">* Selecione o Pais.</mat-error>
+          <mat-error *ngIf="entityForm.controls['pais'].hasError('required') ||
+           entityForm.controls['pais'].hasError('paisInvalido')">* Selecione o Pais.</mat-error>
         </mat-form-field>
       </div>
     </mat-card-content>
@@ -59,6 +60,4 @@
       </button>
     </mat-card-actions>
   </mat-card>
-
-  <pre>{{ entityForm.value | json }}</pre>
 </form>
