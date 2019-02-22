@@ -57,4 +57,8 @@ export class EstadoService {
       'http://localhost:8080/api/estado/autocomplete/' + search,
     );
   }
+
+  count(): Observable<number> {
+    return this.http.get<number>('http://localhost:8080/api/estado/count');
+  }
 }

@@ -13,13 +13,14 @@ import { PaisService } from './pais/pais.service';
 import { EstadoModule } from './estado/estado.module';
 import { EstadoService } from './estado/estado.service';
 import { RelatorioModule } from './relatorio/relatorio.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { MatIconModule } from '@angular/material';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppNavbarComponent,
-    AppDashboardComponent
+    AppNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +29,10 @@ import { RelatorioModule } from './relatorio/relatorio.module';
     AppRoutingModule,
     PaisModule,
     ClienteModule,
+    MatIconModule,
     EstadoModule,
-    RelatorioModule
+    RelatorioModule,
+    DashboardModule
   ],
   providers: [PaisService, ClienteService, EstadoService],
   bootstrap: [AppComponent]

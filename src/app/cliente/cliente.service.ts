@@ -53,6 +53,10 @@ export class ClienteService {
     return this.save(entity);
   }
 
+  count(): Observable<number> {
+    return this.http.get<number>('http://localhost:8080/api/cliente/count');
+  }
+
   getRelatorioFilter(filtro: Filtro): Observable<any> {
     let params = new HttpParams();
     if (filtro.nome) {

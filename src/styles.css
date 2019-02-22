@@ -2,5 +2,5 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 .background {
-  background-color: blueviolet;
+  background-image: url("http://lemosmonteiro.adv.br/wp-content/uploads/2018/06/blue.jpg");
 }

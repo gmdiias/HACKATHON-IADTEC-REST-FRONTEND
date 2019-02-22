@@ -68,4 +68,8 @@ export class PaisService {
       'http://localhost:8080/api/pais/autocomplete/' + search,
     );
   }
+
+  count(): Observable<number> {
+    return this.http.get<number>('http://localhost:8080/api/pais/count');
+  }
 }

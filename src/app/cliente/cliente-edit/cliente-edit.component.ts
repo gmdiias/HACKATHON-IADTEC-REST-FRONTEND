@@ -138,7 +138,7 @@ export class ClienteEditComponent implements OnInit {
   onSubmit() {
     this.entityForm.disable();
     this.clienteService.saveOrCreate(this.isNew, this.entityForm.value).then(_ => {
-      this.openSnackBar('cliente salvo com sucesso!', 'Ok');
+      this.openSnackBar('Cliente salvo com sucesso!', 'Ok');
       this.router.navigate(['cliente/list']);
     }).catch(_ => {
       this.openSnackBar('Ocorreu um erro ao salvar o cliente!', 'Erro');

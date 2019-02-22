@@ -1,1 +1,35 @@
-<p>Bem vindo ao Painel do Hackaton IADTEC</p>
+<mat-card>
+  <p>Bem vindo ao Painel do Hackaton IADTEC</p>
+</mat-card>
+
+<h2 class="mt-3">
+  <mat-icon class="mr-3">dashboard</mat-icon>
+  Dashboard
+</h2>
+
+<mat-card class="mt-3" style="background-color: #e6e6e6">
+  <p><mat-icon class="mr-1">report</mat-icon> Relatórios do sistema:</p>
+  <div class="row">
+    <div class="col-4">
+      <mat-card class="col-6">
+        <mat-card-header
+          ><mat-icon class="mr-1">account_circle</mat-icon
+          >Clientes</mat-card-header
+        >
+        <h3>{{ countCliente }}</h3>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-card class="col-6">
+        <mat-card-header><mat-icon class="mr-1">label</mat-icon>Estados</mat-card-header>
+        <h3>{{ countEstado }}</h3>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-card class="col-6">
+        <mat-card-header><mat-icon class="mr-1">room</mat-icon>Paises</mat-card-header>
+        <h3>{{ countPais }}</h3>
+      </mat-card>
+    </div>
+  </div>
+</mat-card>
