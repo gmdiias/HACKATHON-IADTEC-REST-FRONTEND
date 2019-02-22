@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Cliente } from './cliente.model';
+import { Filtro } from '../relatorio/filtro.model';
 
 @Injectable()
 export class ClienteService {
@@ -50,5 +51,21 @@ export class ClienteService {
       return this.create(entity);
     }
     return this.save(entity);
+  }
+
+  getRelatorioFilter(filtro: Filtro): Observable<any> {
+    let params = new HttpParams();
+    if (filtro.nome) {
+      params = params.set('nome', filtro.nome);
+    }
+    if (filtro.dataNascimento) {
+      params = params.set('data', filtro.dataNascimento.toLocaleDateString());
+    }
+    if (filtro.situacao) {
+      params = params.set('situacao', filtro.situacao);
+    }
+    return this.http.get('http://localhost:8080/api/cliente/filtro', {
+      params,
+    });
   }
 }

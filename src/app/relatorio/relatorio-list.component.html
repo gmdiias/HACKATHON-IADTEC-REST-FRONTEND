@@ -1,8 +1,44 @@
 <h2>Relatorio de Clientes</h2>
 
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
-</mat-form-field>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Seleção de Filtros
+      </mat-panel-title>
+      <mat-panel-description>
+        Selecione os Filtros desejados
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field class="col-4">
+      <input
+        matInput
+        placeholder="Filtrar por Nome do Cliente"
+        name="nomeFilter"
+        [(ngModel)]="filtro.nome"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="col-4">
+      <input matInput [matDatepicker]="picker" [(ngModel)]="filtro.dataNascimento" placeholder="Selecione a Data de Nascimento">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="col-4">
+      <mat-select placeholder="Selecione a Situação do Cliente" [(ngModel)]="filtro.situacao">
+        <mat-option *ngFor="let situacao of situacoes" [value]="situacao.value">
+          {{situacao.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-action-row>
+      <button mat-raised-button color="primary" (click)="refreshList()">Filtrar</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

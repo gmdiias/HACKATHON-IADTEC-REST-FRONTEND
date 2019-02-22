@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatSnackBarModule, MatTableModule, MatInputModule } from "@angular/material";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatButtonModule, MatCardModule, MatDatepickerModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatNativeDateModule, MatSnackBarModule, MatTableModule, MatSelectModule } from "@angular/material";
 import { RelatorioListComponent } from "./relatorio-list.component";
 
 @NgModule({
@@ -13,9 +13,14 @@ import { RelatorioListComponent } from "./relatorio-list.component";
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatExpansionModule,
     MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
     MatSnackBarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [RelatorioListComponent]
 })
