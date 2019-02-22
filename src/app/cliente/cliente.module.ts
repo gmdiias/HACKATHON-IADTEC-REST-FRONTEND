@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSnackBarModule, MatTableModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSnackBarModule, MatTableModule, MatAutocompleteModule } from '@angular/material';
 import { ClienteEditComponent } from './cliente-edit/cliente-edit.component';
 import { ClienteListComponent } from './cliente-list/cliente-list.component';
 
@@ -18,6 +18,7 @@ import { ClienteListComponent } from './cliente-list/cliente-list.component';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatAutocompleteModule,
     MatSnackBarModule,
     ReactiveFormsModule
   ],

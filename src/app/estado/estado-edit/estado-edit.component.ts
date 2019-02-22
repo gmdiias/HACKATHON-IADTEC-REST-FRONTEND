@@ -24,7 +24,7 @@ export class EstadoEditComponent implements OnInit {
     this.entityForm = fb.group(new Estado());
   }
 
-  fornecedores: Observable<Pais[]> = of([]);
+  paises: Observable<Pais[]> = of([]);
 
   private paramSub: Subscription;
   ngOnInit() {
@@ -77,14 +77,14 @@ export class EstadoEditComponent implements OnInit {
 
 
   onChange(valor: any) {
-    this.fornecedores = this._filter(valor);
+    this.paises = this._filter(valor);
   }
 
   private _filter(value: string): Observable<Pais[]> {
     if (value && value.length < 18) {
       return this.paisService.autocomplete(value);
     }
-    return this.fornecedores;
+    return this.paises;
   }
 
   formatFornecedorName(fornecedor: Pais): string {

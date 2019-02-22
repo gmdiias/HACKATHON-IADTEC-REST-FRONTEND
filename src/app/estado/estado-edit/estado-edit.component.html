@@ -16,10 +16,10 @@
         </mat-form-field>
 
         <mat-form-field class="col-7">
-          <input #fornecedorField matInput placeholder="Fornecedor" [matAutocomplete]="auto" formControlName="pais" (input)="onChange($event.target.value)">
+          <input #fornecedorField matInput placeholder="Selecione o Pais" [matAutocomplete]="auto" formControlName="pais" (input)="onChange($event.target.value)" required>
           <mat-autocomplete #auto="matAutocomplete" [displayWith]="formatFornecedorName">
-            <mat-option *ngFor="let f of fornecedores | async" [value]="f">
-              {{f.nome}}
+            <mat-option *ngFor="let p of paises | async" [value]="p">
+              {{p.nome}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>

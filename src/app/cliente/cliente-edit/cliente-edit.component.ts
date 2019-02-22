@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ClienteService } from '../cliente.service';
 import { Cliente } from '../cliente.model';
+import { Estado } from 'src/app/estado/estado.model';
+import { EstadoService } from 'src/app/estado/estado.service';
 
 @Component({
   selector: 'app-cliente-edit',
@@ -16,9 +18,10 @@ export class ClienteEditComponent implements OnInit {
   entity: Cliente;
   entityForm: FormGroup;
   isNew = true;
+  estados: Observable<Estado[]> = of([]);
 
   constructor(private router: Router, fb: FormBuilder, private clienteService: ClienteService,
-    private snackBar: MatSnackBar, protected activatedRoute: ActivatedRoute) {
+    private snackBar: MatSnackBar, protected activatedRoute: ActivatedRoute, private estadoService: EstadoService) {
     this.entityForm = fb.group(new Cliente());
   }
 
@@ -68,5 +71,20 @@ export class ClienteEditComponent implements OnInit {
     this.snackBar.open(mensagem, acao, {
       duration: 5000,
     });
+  }
+
+  onChange(valor: any) {
+    this.estados = this._filter(valor);
+  }
+
+  private _filter(value: string): Observable<Estado[]> {
+    if (value && value.length < 18) {
+      return this.estadoService.autocomplete(value);
+    }
+    return this.estados;
+  }
+
+  formatFornecedorName(estado: Estado): string {
+    return estado.nome;
   }
 }

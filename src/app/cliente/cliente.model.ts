@@ -9,5 +9,5 @@ export class Cliente {
   dataNascimento = 0;
   email = '';
   situacao: 'ATIVO' | 'INATIVO' | 'REMOVIDO' = 'ATIVO';
-  estado: Estado;
+  estado: Estado = new Estado();
 }
