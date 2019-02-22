@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { MatSnackBar, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { MatSnackBar, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS, MatSelectChange } from '@angular/material';
 import { Subscription, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ClienteService } from '../cliente.service';
@@ -24,6 +24,8 @@ const _INVALIDCPF = [
   '99999999999',
   '12345678909',
 ];
+
+
 
 function digitoVerificador(numbers: string): number {
   const numberArray = numbers.split('').map(digit => parseInt(digit, 10));
@@ -77,6 +79,13 @@ export function estadoValidator(c: AbstractControl): ValidationErrors | null {
   ]
 })
 export class ClienteEditComponent implements OnInit {
+
+  situacoes = [
+    {value: 'ATIVO', viewValue: 'Ativo'},
+    {value: 'INATIVO', viewValue: 'Inativo'},
+    {value: 'REMOVIDO', viewValue: 'Removido'}
+  ];
+
   entity: Cliente;
   entityForm: FormGroup;
   isNew = true;
@@ -109,6 +118,7 @@ export class ClienteEditComponent implements OnInit {
   }
 
   updateEntity(newEntity?: Cliente): void {
+    console.log(newEntity);
     this.isNew = this.checkIsNew(newEntity.id);
     this.entity = newEntity || new Cliente();
     this.entityForm.patchValue(this.entity);
@@ -156,4 +166,9 @@ export class ClienteEditComponent implements OnInit {
   formatFornecedorName(estado: Estado): string {
     return estado.nome;
   }
+
+  selectionChange(event: MatSelectChange) {
+    this.entityForm.controls.situacao.patchValue(event.value);
+  }
+
 }
