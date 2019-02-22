@@ -6,5 +6,5 @@ export class Estado {
   dataCriacao = 0;
   nome = '';
   uf = '';
-  pais: Pais;
+  pais: Pais = new Pais();
 }

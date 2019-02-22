@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Estado } from '../estado.model';
 import { EstadoService } from '../estado.service';
+import { Pais } from 'src/app/pais/pais.model';
+import { PaisService } from 'src/app/pais/pais.service';
 
 @Component({
   selector: 'app-estado-edit',
@@ -18,9 +20,11 @@ export class EstadoEditComponent implements OnInit {
   isNew = true;
 
   constructor(private router: Router, fb: FormBuilder, private estadoService: EstadoService,
-    private snackBar: MatSnackBar, protected activatedRoute: ActivatedRoute) {
+    private snackBar: MatSnackBar, protected activatedRoute: ActivatedRoute, private paisService: PaisService) {
     this.entityForm = fb.group(new Estado());
   }
+
+  fornecedores: Observable<Pais[]> = of([]);
 
   private paramSub: Subscription;
   ngOnInit() {
@@ -70,4 +74,21 @@ export class EstadoEditComponent implements OnInit {
       duration: 5000,
     });
   }
+
+
+  onChange(valor: any) {
+    this.fornecedores = this._filter(valor);
+  }
+
+  private _filter(value: string): Observable<Pais[]> {
+    if (value && value.length < 18) {
+      return this.paisService.autocomplete(value);
+    }
+    return this.fornecedores;
+  }
+
+  formatFornecedorName(fornecedor: Pais): string {
+    return fornecedor.nome;
+  }
+
 }

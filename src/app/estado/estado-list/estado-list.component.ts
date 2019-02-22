@@ -9,7 +9,7 @@ import { EstadoService } from '../estado.service';
   styleUrls: ['./estado-list.component.css']
 })
 export class EstadoListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nome', 'uf', 'options'];
+  displayedColumns: string[] = ['id', 'nome', 'uf', 'pais', 'options'];
   dataSource = new MatTableDataSource();
 
   constructor(private estadoService: EstadoService, private router: Router, private snackBar: MatSnackBar) { }

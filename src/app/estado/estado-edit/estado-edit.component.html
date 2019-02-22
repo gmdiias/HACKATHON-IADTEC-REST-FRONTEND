@@ -15,6 +15,15 @@
           <input matInput placeholder="UF" formControlName="uf" required>
         </mat-form-field>
 
+        <mat-form-field class="col-7">
+          <input #fornecedorField matInput placeholder="Fornecedor" [matAutocomplete]="auto" formControlName="pais" (input)="onChange($event.target.value)">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="formatFornecedorName">
+            <mat-option *ngFor="let f of fornecedores | async" [value]="f">
+              {{f.nome}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
       </div>
     </mat-card-content>
     <mat-card-actions>
@@ -23,4 +32,6 @@
         {{isNew ? 'Inserir' : 'Salvar'}}</button>
     </mat-card-actions>
   </mat-card>
+
+  <pre>{{entityForm.value | json}}</pre>
 </form>

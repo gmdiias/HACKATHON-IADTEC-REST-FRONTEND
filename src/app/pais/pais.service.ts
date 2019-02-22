@@ -51,4 +51,10 @@ export class PaisService {
     }
     return this.save(entity);
   }
+
+  autocomplete(search: string) {
+    return this.http.get<Pais[]>(
+      'http://localhost:8080/api/pais/autocomplete/' + search,
+    );
+  }
 }
