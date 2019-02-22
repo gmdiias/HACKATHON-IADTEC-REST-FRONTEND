@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Pais } from './pais.model';
@@ -11,6 +11,17 @@ export class PaisService {
 
   getAll(): Observable<any> {
     return this.http.get('http://localhost:8080/api/pais/');
+  }
+
+  search(): Observable<any> {
+
+    let params = new HttpParams()
+    .set('page_size', `1`)
+    .set('page_page', `2`);
+
+    return this.http.get('http://localhost:8080/api/pais/search', {
+      params
+    });
   }
 
   findById(id: number): Observable<Pais> {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { PaisService } from '../pais.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pais-list',
@@ -12,7 +13,11 @@ export class PaisListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'options'];
   dataSource = new MatTableDataSource();
 
-  constructor(private paisService: PaisService, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private paisService: PaisService, private router: Router, private snackBar: MatSnackBar) {
+    paisService.search().pipe(
+      tap(console.log)
+    ).subscribe(value => value);
+  }
 
   ngOnInit() {
     this.refreshList();
