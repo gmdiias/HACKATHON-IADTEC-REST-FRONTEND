@@ -6,7 +6,7 @@ export class Cliente {
   dataCriacao = 0;
   nome = '';
   cpf = '';
-  dataNascimento = 0;
+  dataNascimento = new Date();
   email = '';
   situacao: 'ATIVO' | 'INATIVO' | 'REMOVIDO' = 'ATIVO';
   estado: Estado = new Estado();

@@ -2,37 +2,89 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        {{isNew ? 'Cadastrar' : 'Editar'}} Cliente
+        {{ isNew ? "Cadastrar" : "Editar" }} Cliente
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <mat-form-field class="col-6">
-          <input matInput placeholder="Nome" formControlName="nome" required>
+          <input matInput placeholder="Nome" formControlName="nome" required />
+          <mat-error *ngIf="entityForm.controls['nome'].hasError('required')">* Informe o Nome.</mat-error>
         </mat-form-field>
         <mat-form-field class="col-6">
-          <input matInput placeholder="CPF" formControlName="cpf" required>
+          <input matInput placeholder="CPF" formControlName="cpf" required />
           <mat-hint>XXX.XXX.XXX-YY</mat-hint>
+          <mat-error *ngIf="entityForm.controls['cpf'].hasError('required')">* Informe o CPF.</mat-error>
+          <mat-error *ngIf="entityForm.controls['cpf'].hasError('cpf')">* CPF Inválido.</mat-error>
         </mat-form-field>
         <mat-form-field class="col-6">
-          <input matInput type="email" placeholder="E-mail" formControlName="email" required>
+          <input
+            matInput
+            type="email"
+            placeholder="E-mail"
+            formControlName="email"
+            required
+          />
+          <mat-error *ngIf="entityForm.controls['email'].hasError('required')">* Informe o email.</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="col-7">
-          <input #fornecedorField matInput placeholder="Selecione o Estado" [matAutocomplete]="auto" formControlName="estado" (input)="onChange($event.target.value)" required>
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="formatFornecedorName">
-            <mat-option *ngFor="let e of estados | async" [value]="e">
-              {{e.nome}}
+        <mat-form-field class="col-6">
+          <input
+            #fornecedorField
+            matInput
+            placeholder="Selecione o Estado"
+            [matAutocomplete]="auto"
+            formControlName="estado"
+            (input)="onChange($event.target.value)"
+            required
+          />
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            [displayWith]="formatFornecedorName"
+          >
+            <mat-option *ngFor="let e of (estados | async)" [value]="e">
+              {{ e.nome }}
             </mat-option>
           </mat-autocomplete>
+          <mat-error *ngIf="entityForm.controls['estado'].hasError('required')">* Selecione o estado.</mat-error>
         </mat-form-field>
 
+        <mat-form-field appearance="standard" class="col-3">
+          <input
+            matInput
+            [max]="maxDate"
+            [matDatepicker]="picker"
+            placeholder="Data Nascimento"
+            formControlName="dataNascimento"
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="entityForm.controls['dataNascimento'].hasError('required')">* Informe a Data de Nascimento.</mat-error>
+        </mat-form-field>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" class="mt-3" (click)="onVoltarClick()">Voltar</button>
-      <button mat-raised-button color="primary" [disabled]="!entityForm.valid" (click)="onSubmit()" class="mt-3">
-        {{isNew ? 'Inserir' : 'Salvar'}}</button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="mt-3"
+        (click)="onVoltarClick()"
+      >
+        Voltar
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!entityForm.valid"
+        (click)="onSubmit()"
+        class="mt-3"
+      >
+        {{ isNew ? "Inserir" : "Salvar" }}
+      </button>
     </mat-card-actions>
   </mat-card>
 </form>

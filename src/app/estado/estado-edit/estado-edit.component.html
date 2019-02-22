@@ -9,10 +9,12 @@
       <div class="row">
         <mat-form-field class="col">
           <input matInput placeholder="Nome" formControlName="nome" required />
+          <mat-error *ngIf="entityForm.controls['nome'].hasError('required')">* Informe o Nome.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="col">
           <input matInput placeholder="UF" formControlName="uf" required />
+          <mat-error *ngIf="entityForm.controls['uf'].hasError('required')">* Informe o Nome.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="col-7">
@@ -33,6 +35,7 @@
               {{ p.nome }}
             </mat-option>
           </mat-autocomplete>
+          <mat-error *ngIf="entityForm.controls['pais'].hasError('required')">* Selecione o Pais.</mat-error>
         </mat-form-field>
       </div>
     </mat-card-content>
