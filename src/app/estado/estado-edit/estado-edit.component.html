@@ -2,36 +2,60 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        {{isNew ? 'Cadastrar' : 'Editar'}} Estado
+        {{ isNew ? "Cadastrar" : "Editar" }} Estado
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <mat-form-field class="col">
-          <input matInput placeholder="Nome" formControlName="nome" required>
+          <input matInput placeholder="Nome" formControlName="nome" required />
         </mat-form-field>
 
         <mat-form-field class="col">
-          <input matInput placeholder="UF" formControlName="uf" required>
+          <input matInput placeholder="UF" formControlName="uf" required />
         </mat-form-field>
 
         <mat-form-field class="col-7">
-          <input #fornecedorField matInput placeholder="Selecione o Pais" [matAutocomplete]="auto" formControlName="pais" (input)="onChange($event.target.value)" required>
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="formatFornecedorName">
-            <mat-option *ngFor="let p of paises | async" [value]="p">
-              {{p.nome}}
+          <input
+            #fornecedorField
+            matInput
+            placeholder="Selecione o Pais"
+            [matAutocomplete]="auto"
+            formControlName="pais"
+            (input)="onChange($event.target.value)"
+            required
+          />
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            [displayWith]="formatFornecedorName"
+          >
+            <mat-option *ngFor="let p of (paises | async)" [value]="p">
+              {{ p.nome }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" class="mt-3" (click)="onVoltarClick()">Voltar</button>
-      <button mat-raised-button color="primary" [disabled]="!entityForm.valid" (click)="onSubmit()" class="mt-3">
-        {{isNew ? 'Inserir' : 'Salvar'}}</button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="mt-3"
+        (click)="onVoltarClick()"
+      >
+        Voltar
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!entityForm.valid"
+        (click)="onSubmit()"
+        class="mt-3"
+      >
+        {{ isNew ? "Inserir" : "Salvar" }}
+      </button>
     </mat-card-actions>
   </mat-card>
 
-  <pre>{{entityForm.value | json}}</pre>
+  <pre>{{ entityForm.value | json }}</pre>
 </form>

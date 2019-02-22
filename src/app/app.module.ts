@@ -12,6 +12,7 @@ import { PaisModule } from './pais/pais.module';
 import { PaisService } from './pais/pais.service';
 import { EstadoModule } from './estado/estado.module';
 import { EstadoService } from './estado/estado.service';
+import { RelatorioModule } from './relatorio/relatorio.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { EstadoService } from './estado/estado.service';
     AppRoutingModule,
     PaisModule,
     ClienteModule,
-    EstadoModule
+    EstadoModule,
+    RelatorioModule
   ],
   providers: [PaisService, ClienteService, EstadoService],
   bootstrap: [AppComponent]

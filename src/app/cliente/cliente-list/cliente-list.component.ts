@@ -1,18 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource, MatSort, MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
-import { ClienteService } from '../cliente.service';
+import { Component, OnInit } from "@angular/core";
+import { MatTableDataSource, MatSort, MatSnackBar } from "@angular/material";
+import { Router } from "@angular/router";
+import { ClienteService } from "../cliente.service";
 
 @Component({
-  selector: 'app-cliente-list',
-  templateUrl: './cliente-list.component.html',
-  styleUrls: ['./cliente-list.component.css']
+  selector: "app-cliente-list",
+  templateUrl: "./cliente-list.component.html",
+  styleUrls: ["./cliente-list.component.css"]
 })
 export class ClienteListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'estado', 'options'];
+  displayedColumns: string[] = [
+    "id",
+    "nome",
+    "cpf",
+    "email",
+    "estado",
+    "options"
+  ];
   dataSource = new MatTableDataSource();
 
-  constructor(private clienteService: ClienteService, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(
+    private clienteService: ClienteService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.refreshList();
@@ -32,29 +43,43 @@ export class ClienteListComponent implements OnInit {
   }
 
   onAddClick() {
-    this.router.navigate(['cliente/edit']);
+    this.router.navigate(["cliente/edit"]);
   }
 
   onVoltarClick() {
-    this.router.navigate(['/']);
+    this.router.navigate(["/"]);
   }
 
   onEditClick(id: number) {
-    this.router.navigate(['cliente/edit/', id]);
+    this.router.navigate(["cliente/edit/", id]);
   }
 
   onDeleteClick(id: number) {
-    this.clienteService.deleteById(id).then(_ => {
-      this.openSnackBar('Produto deletado com sucesso!', 'Ok');
-      this.refreshList();
-    },
-    ).catch(_ => this.openSnackBar('Ocorreu um erro ao remover o Cliente!', 'Erro'));
+    this.clienteService
+      .deleteById(id)
+      .then(_ => {
+        this.openSnackBar("Produto deletado com sucesso!", "Ok");
+        this.refreshList();
+      })
+      .catch(_ =>
+        this.openSnackBar("Ocorreu um erro ao remover o Cliente!", "Erro")
+      );
   }
 
   openSnackBar(mensagem: string, acao: string) {
     this.snackBar.open(mensagem, acao, {
-      duration: 5000,
+      duration: 5000
     });
   }
 
+  formataCpf(cpf: string) {
+    if (cpf && cpf.length === 11) {
+      return cpf.replace(
+        /(\d{3})[.]?(\d{3})[.]?(\d{3})[-]?(\d{2})/,
+        "$1.$2.$3-$4"
+      );
+    }
+
+    return "CPF Inválido";
+  }
 }
