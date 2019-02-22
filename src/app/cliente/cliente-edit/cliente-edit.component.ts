@@ -59,6 +59,15 @@ export function cpfValidator(c: AbstractControl): ValidationErrors | null {
   return { cpf: 'CPF Inválido' };
 }
 
+export function estadoValidator(c: AbstractControl): ValidationErrors | null {
+  const estado: Estado = c.value;
+
+  if (estado && estado.id && estado.id !== -1) {
+    return null;
+  }
+  return { estadoInvalido: "Estado Inválido" };
+}
+
 @Component({
   selector: 'app-cliente-edit',
   templateUrl: './cliente-edit.component.html',
@@ -102,9 +111,10 @@ export class ClienteEditComponent implements OnInit {
         this.updateEntity(e);
       });
 
-    const cpf = this.entityForm.get("cpf");
-
+    const cpf = this.entityForm.get('cpf');
     cpf.setValidators(cpfValidator);
+    const paisControl = this.entityForm.get('estado');
+    paisControl.setValidators(estadoValidator);
   }
 
   updateEntity(newEntity?: Cliente): void {

@@ -9,6 +9,7 @@
       <div class="row">
         <mat-form-field class="col">
           <input matInput placeholder="Nome" formControlName="nome" required>
+          <mat-error *ngIf="entityForm.controls['nome'].hasError('required')">* Informe o Nome.</mat-error>
         </mat-form-field>
 
       </div>
