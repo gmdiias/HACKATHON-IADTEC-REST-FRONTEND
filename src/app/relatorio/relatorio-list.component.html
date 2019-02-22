@@ -28,6 +28,7 @@
 
     <mat-form-field class="col-4">
       <mat-select placeholder="Selecione a Situação do Cliente" [(ngModel)]="filtro.situacao">
+        <mat-option>--</mat-option>
         <mat-option *ngFor="let situacao of situacoes" [value]="situacao.value">
           {{situacao.viewValue}}
         </mat-option>

@@ -59,7 +59,8 @@ export class ClienteService {
       params = params.set('nome', filtro.nome);
     }
     if (filtro.dataNascimento) {
-      params = params.set('data', filtro.dataNascimento.toLocaleDateString());
+      const data = new Date(filtro.dataNascimento);
+      params = params.set('data', data.toLocaleDateString());
     }
     if (filtro.situacao) {
       params = params.set('situacao', filtro.situacao);
